@@ -11,5 +11,9 @@ def hello():
 def test():
     return "<h1 style='color:blue'>General Kenobi!</h1>"
 
+@app.route("/")
+def index():
+    return "<h1 style='color:blue'>Hello There!</h1>"
+
 if __name__ == "__main__":
     app.run()
