@@ -1,7 +1,11 @@
 from flask import Flask, flash, render_template, request, session, redirect, url_for, jsonify
+from flask_socketio import SocketIO
 app = Flask(__name__)
 
 app.config["SERVER_NAME"] = "buzz.colindaugherty.net"
+app.config["SECRET_KEY"] = "sUP3R-S3cRE7_H4&H"
+
+socketio = SocketIO(app)
 
 @app.route("/api")
 def index():
@@ -32,5 +36,14 @@ def deleteGame(gameID):
     deletedGame = True
     return jsonify({'deletedGame' : deletedGame})
 
+@socketio.on('newPlayerJoined', namespace='/sockets')
+def playerJoined(json):
+    print("Got newPlayerJoined")
+    room = json['room']
+    player = json['player']
+    print(f"Parsed data, name is {player} and room is {room}")
+    socketio.emit('playerJoined', {'player' : str(player)}, room=room, namespace='/sockets')
+    print("Sent")
+
 if __name__ == "__main__":
-    app.run()
+    socketio.run(app)
