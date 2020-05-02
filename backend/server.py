@@ -1,7 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
-app.config["SERVER_NAME"] = ["buzz.colindaugherty.net"]
+app.config["SERVER_NAME"] = "buzz.colindaugherty.net"
 
 @app.route("/api")
 def hello():
