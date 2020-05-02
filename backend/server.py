@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config["SERVER_NAME"] = "buzz.colindaugherty.net"
 app.config["SECRET_KEY"] = "sUP3R-S3cRE7_H4&H"
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, ping_timeout=120)
 
 @app.route("/api")
 def index():
