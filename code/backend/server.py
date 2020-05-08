@@ -1,5 +1,8 @@
 from flask import Flask, flash, render_template, request, session, redirect, url_for, jsonify
 from flask_socketio import SocketIO
+from gevent import monkey
+monkey.patch_all()
+
 app = Flask(__name__)
 
 app.config["SERVER_NAME"] = "buzz.colindaugherty.net"
@@ -46,4 +49,4 @@ def playerJoined(json):
     print("Sent")
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, host='0.0.0.0', port=5000)
