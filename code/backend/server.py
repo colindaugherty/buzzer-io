@@ -1,52 +1,32 @@
-from flask import Flask, flash, render_template, request, session, redirect, url_for, jsonify
-from flask_socketio import SocketIO
-from gevent import monkey
-monkey.patch_all()
+from flask import Flask, Response
+from flask_restplus import Api
+from flask_socketio import SocketIO, send, emit
+import pdb
+import eventlet
+eventlet.monkey_patch()
 
 app = Flask(__name__)
+api = Api(app)
+socketio = SocketIO(app, message_queue='redis://redis:6379')
 
-app.config["SERVER_NAME"] = "buzz.colindaugherty.net"
-app.config["SECRET_KEY"] = "sUP3R-S3cRE7_H4&H"
+@app.route('/')
+def get_domain():
+    return Response('OK')
 
-socketio = SocketIO(app, ping_timeout=120)
+@socketio.on('connect')
+def handle_connect():
+    print('client connected')
 
-@app.route("/api")
-def index():
-    return render_template("api.html")
 
-@app.route("/api/startGame/<int:gameID>")
-def startGame(gameID):
-    setUpDone = True
-    return jsonify({'setUpDone' : setUpDone})
+@socketio.on('message')
+def handle_message(message):
+    emit('message', message, broadcast=True, json=True)
 
-@app.route("/api/getPlayerList/<int:gameID>", methods=['GET'])
-def getPlayerList(gameID):
-    player_list = "Coming soon"
-    return jsonify({'player_list' : player_list})
 
-@app.route("/api/getPlayerBuzzes/<int:gameID>", methods=['GET'])
-def getPlayerBuzzes(gameID):
-    player_buzzes = "Coming soon"
-    return jsonify({'player_buzzes' : player_buzzes})
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('client disconnected')
 
-@app.route("/api/updatePlayerList/<int:gameID>", methods=['PUT'])
-def updatePlayerList(gameID):
-    updatedList = []
-    return jsonify({'updatedPlayerList' : updatedList})
 
-@app.route("/api/deleteGame/<int:gameID>", methods=['DELETE'])
-def deleteGame(gameID):
-    deletedGame = True
-    return jsonify({'deletedGame' : deletedGame})
-
-@socketio.on('newPlayerJoined', namespace='/sockets')
-def playerJoined(json):
-    print("Got newPlayerJoined")
-    room = json['room']
-    player = json['player']
-    print(f"Parsed data, name is {player} and room is {room}")
-    socketio.emit('playerJoined', {'player' : str(player)}, room=room, namespace='/sockets')
-    print("Sent")
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000)
