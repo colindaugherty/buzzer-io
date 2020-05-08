@@ -21,7 +21,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     links:
-      - api
+      - servercode
 
   mongo:
     image: mongo:latest
