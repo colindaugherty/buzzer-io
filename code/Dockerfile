@@ -7,6 +7,7 @@ RUN apt-get -y install nodejs
 RUN mkdir /code
 COPY ./requirements.txt /code/requirements.txt
 WORKDIR /code
+RUN npm update
 RUN npm install -g @angular/cli
 RUN npm install ngx-socket-io
 RUN pip3 install -r requirements.txt
