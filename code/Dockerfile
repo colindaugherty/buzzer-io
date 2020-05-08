@@ -7,13 +7,11 @@ RUN apt-get -y install nodejs
 RUN mkdir /code
 COPY ./requirements.txt /code/requirements.txt
 WORKDIR /code
-RUN npm update
-RUN npm install -g @angular/cli
-RUN npm install --save-dev @angular-devkit/build-angular
-RUN npm install ngx-socket-io
 RUN pip3 install -r requirements.txt
 COPY . /code
 WORKDIR /code/frontend/buzzer-io
+RUN npm update
+RUN npm install
 RUN ng build --prod
 WORKDIR /code
 RUN rm -rf /code/backend/static
