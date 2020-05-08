@@ -15,7 +15,5 @@ RUN npm update
 RUN npm install
 RUN ng build --prod
 WORKDIR /code
-RUN rm -rf /code/backend/static
-RUN bash -c 'ln /code/frontend/buzzer-io/dist /code/backend/static'
 CMD ["python3", "server.py"]
 EXPOSE 5000
