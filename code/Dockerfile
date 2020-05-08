@@ -1,7 +1,8 @@
 FROM ubuntu:latest
 USER root
+RUN apt-get update && apt-get -y install curl gnupg python3-pip
 RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
-RUN apt-get update && apt-get -y install curl gnupg python3-pip nodejs
+RUN apt-get -y install nodejs
 RUN mkdir /code
 COPY ./requirements.txt /code/requirements.txt
 WORKDIR /code
