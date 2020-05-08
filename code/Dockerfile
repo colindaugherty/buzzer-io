@@ -6,11 +6,15 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
 RUN apt-get -y install nodejs
 RUN mkdir /code
 WORKDIR /code
+RUN ls
+RUN sleep 15s
 RUN npm install -g @angular/cli
 RUN npm install ngx-socket-io
 ADD requirements.txt .
 RUN pip3 install -r requirements.txt
 WORKDIR /code/frontend/buzzer-io
+RUN ls
+RUN sleep 15s
 RUN ng build --prod
 WORKDIR /code
 RUN rm -rf ./backend/static
