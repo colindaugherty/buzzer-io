@@ -15,5 +15,5 @@ RUN npm update
 RUN npm install
 RUN ng build --prod
 WORKDIR /code
-CMD ["python3", "server.py"]
+CMD ["python3", "backend/server.py"]
 EXPOSE 5000
