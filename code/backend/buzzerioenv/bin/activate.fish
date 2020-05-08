@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/colindaugherty/buzzer-io/backend/buzzerioenv"
+set -gx VIRTUAL_ENV "/home/colindaugherty/development/buzzer-io/code/backend/buzzerioenv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
