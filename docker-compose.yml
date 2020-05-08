@@ -1,37 +1,36 @@
 version: '3'
 services:
 
-	serverCode:
-		build: ./code
-		volumes:
-			- ./code:/code
-		restart: 'always'
-		links:
-			- mongo
-			- redis
-		expose:
-			- 5000
+  serverCode:
+    build: ./code
+    volumes:
+      - ./code:/code
+    restart: 'always'
+    links:
+      - mongo
+      - redis
+    expose:
+      - 5000
 
-	nginx:
-		image: nginx:latest
-		restart: always
-		ports:
-			- 5001:80
-			- 443:443
-		volumes:
-			- ./nginx/nginx.conf:/etc/nginx/nginx.conf
-		links:
-			- serverCode
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 5001:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - api
 
-	mongo:
-		image: mongo:latest
-		restart: always
-		expose:
-			- 27017
+  mongo:
+    image: mongo:latest
+    restart: always
+    expose:
+      - 27017
 
-	redis:
-		image: redis:latest
-		expose:
-			- 6379
-		restart: always
-
+  redis:
+    image: redis:latest
+    expose:
+      - 6379
+    restart: always
