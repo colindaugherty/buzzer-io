@@ -6,5 +6,3 @@ COPY requirements.txt requirements.txt
 RUN python -m pip install -r requirements.txt
 
 COPY  . .
-CMD ["python3", "backend/server.py"]
-EXPOSE 5000
