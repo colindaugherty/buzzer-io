@@ -41,4 +41,4 @@ volumes:
     driver: local
     driver_opts: 
       type: bind
-      device: ./code/frontend/buzzer-io/dist
+      device: $PWD/code/frontend/buzzer-io/dist
