@@ -10,7 +10,7 @@ services:
       - mongo
       - redis
     expose:
-      - 5000
+      - 8000
 
   nginx:
     restart: always
