@@ -6,3 +6,5 @@ COPY requirements.txt requirements.txt
 RUN python -m pip install -r requirements.txt
 
 COPY  . .
+WORKDIR /backend
+CMD ["gunicorn",  "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "2", "server:app"]
