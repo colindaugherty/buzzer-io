@@ -38,3 +38,7 @@ services:
 
 volumes:
   web-data:
+    driver: local
+    driver_opts: 
+      type: bind
+      device: ./code/frontend/buzzer-io/dist
