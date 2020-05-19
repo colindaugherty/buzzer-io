@@ -7,4 +7,4 @@ RUN python -m pip install -r requirements.txt
 
 COPY  . .
 WORKDIR /backend
-CMD ["gunicorn",  "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "2", "-b", "0.0.0.0:5000", "server:app"]
+CMD ["gunicorn",  "--worker-class", "eventlet", "-w", "2", "-b", "0.0.0.0:5000", "server:app"]

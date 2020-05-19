@@ -1,7 +1,8 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, flash, render_template, request, session, redirect, url_for, jsonify
 from flask_socketio import SocketIO
-from gevent import monkey
-monkey.patch_all()
 
 app = Flask(__name__)
 
