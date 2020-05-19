@@ -11,7 +11,6 @@ services:
       - redis
     expose:
       - 5000
-    command: /usr/local/bin/gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 server:app
 
   nginx:
     restart: always
