@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    build: ./web
+    build: ./code
     volumes:
       - web-data:/usr/src/app/static
     restart: always
