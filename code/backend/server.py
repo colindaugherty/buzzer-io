@@ -39,13 +39,13 @@ def deleteGame(gameID):
     deletedGame = True
     return jsonify({'deletedGame' : deletedGame})
 
-@socketio.on('newPlayerJoined', namespace='/sockets')
+@socketio.on('newPlayerJoined')
 def playerJoined(json):
     print("Got newPlayerJoined")
     room = json['room']
     player = json['player']
     print(f"Parsed data, name is {player} and room is {room}")
-    socketio.emit('playerJoined', {'player' : str(player)}, room=room, namespace='/sockets')
+    socketio.emit('playerJoined', {'player' : str(player)})
     print("Sent")
 
 if __name__ == "__main__":
