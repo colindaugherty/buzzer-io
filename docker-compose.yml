@@ -40,5 +40,6 @@ volumes:
   web-data:
     driver: local
     driver_opts: 
-      type: bind
+      type: none
       device: $PWD/code/frontend/buzzer-io/dist
+      o: bind
